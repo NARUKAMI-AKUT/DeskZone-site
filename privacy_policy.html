@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プライバシーポリシー — Desktop Zoning</title>
+  <style>
+    :root {
+      --bg: #050e17;
+      --surface: #0d1f30;
+      --accent: #6db3f2;
+      --text: #e8eaf0;
+      --muted: #8090a0;
+      --border: #1e3044;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', sans-serif;
+      line-height: 1.75;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 760px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .app-name { color: var(--accent); font-size: 1.1rem; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 0.5rem; }
+    h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .updated { color: var(--muted); font-size: 0.875rem; }
+    section { margin-bottom: 2.5rem; }
+    h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      border-left: 3px solid var(--accent);
+      padding-left: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    p { margin-bottom: 0.75rem; }
+    ul { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+    li { margin-bottom: 0.4rem; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 0.75rem; font-size: 0.9rem; }
+    th { background: var(--surface); color: var(--accent); font-weight: 600; text-align: left; padding: 0.6rem 0.75rem; border: 1px solid var(--border); }
+    td { padding: 0.6rem 0.75rem; border: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .lang-divider { border: none; border-top: 2px solid var(--border); margin: 3rem 0; }
+    .lang-label { text-align: center; color: var(--muted); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem; }
+    footer { text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ── 日本語 ── -->
+  <header>
+    <div class="app-name">Desktop Zoning</div>
+    <h1>プライバシーポリシー / 免責事項</h1>
+    <p class="updated">最終更新: 2026年7月15日</p>
+  </header>
+
+  <section>
+    <h2>1. はじめに</h2>
+    <p>Desktop Zoning（以下「本サービス」）は、NARUKAMI AKUT が提供する、Windowsデスクトップのアイコンをゾーン分けする壁紙を作成するWebツールです。本サービスはインストール不要のブラウザ上で完結するアプリであり、本ポリシーは本サービスがどのような情報を扱うかを説明します。</p>
+  </section>
+
+  <section>
+    <h2>2. 収集する情報</h2>
+    <table>
+      <thead>
+        <tr><th>情報の種類</th><th>用途</th><th>外部送信</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>背景画像・ゾーン名などの入力内容</td>
+          <td>壁紙・確認画像の生成</td>
+          <td>なし（ブラウザ内のみで処理）</td>
+        </tr>
+        <tr>
+          <td>環境設定・ゾーン設定データ</td>
+          <td>次回訪問時に設定を復元</td>
+          <td>なし（ブラウザのlocalStorageに保存のみ）</td>
+        </tr>
+        <tr>
+          <td>匿名利用統計（機能の使用回数・エラー種別）</td>
+          <td>機能改善のための利用状況把握（Google Analytics）</td>
+          <td>あり（Google）</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>本サービスはアカウント登録・ログイン機能を持たず、氏名・メールアドレス等の個人識別情報を収集しません。<strong>背景画像そのもの、ゾーン名などユーザーが入力した自由テキスト、生成された壁紙・画像の中身は、いかなる場合も外部サーバーへ送信されません。</strong>匿名利用統計として送信されるのは「どの機能が何回使われたか」「エラーが発生したか」といった技術的な利用状況のみです。</p>
+  </section>
+
+  <section>
+    <h2>3. 第三者サービス</h2>
+    <p>本サービスは以下の Google サービスを利用しています。個人情報の取り扱いについては、Google のプライバシーポリシーをご確認ください。</p>
+    <ul>
+      <li><strong>Google Analytics（GA4）</strong> — ページ閲覧数、機能の使用回数（ゾーン作成・壁紙出力など）、エラー発生状況を匿名で収集します。画像データ・ゾーン名・生成物の中身は一切含まれません。</li>
+    </ul>
+    <p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google プライバシーポリシー →</a></p>
+  </section>
+
+  <section>
+    <h2>4. 画像データの取り扱い</h2>
+    <p>本サービスで選択した背景画像は、お使いのブラウザのメモリ上でのみ処理され、サーバーへのアップロードや保存は一切行われません。生成された壁紙・確認画像（PNG）はお使いの端末へ直接ダウンロードされるのみで、本サービスの運営者を含む第三者がその内容を確認することはできません。ブラウザを閉じる、またはページを再読み込みすると、選択した背景画像はメモリから破棄されます。</p>
+  </section>
+
+  <section>
+    <h2>5. 免責事項</h2>
+    <p>本サービスが生成するグリッド配置・ゾーン分けは、入力された環境情報に基づく計算結果であり、お使いの環境における実際のアイコン配置との完全な一致を保証するものではありません。キャリブレーション機能をご利用のうえ、実際の表示をご確認ください。</p>
+    <p>本サービスの使用中・使用後に生じたいかなる損害についても、開発者は一切の責任を負いません。本サービスは現状有姿（as-is）で提供され、動作の継続性・正確性・特定目的への適合性について、明示・黙示を問わず一切保証しません。</p>
+  </section>
+
+  <section>
+    <h2>6. 子どものプライバシー</h2>
+    <p>本サービスは13歳未満のお子様を対象としていません。意図せず13歳未満の方の情報を収集していた場合は、下記の連絡先までお知らせください。</p>
+  </section>
+
+  <section>
+    <h2>7. ポリシーの変更</h2>
+    <p>本ポリシーは予告なく変更される場合があります。変更後のポリシーはこのページに掲載し、最終更新日を更新します。</p>
+  </section>
+
+  <section>
+    <h2>8. お問い合わせ</h2>
+    <p>プライバシーに関するご質問は下記までご連絡ください。</p>
+    <p><a href="mailto:narukami.dev@gmail.com">narukami.dev@gmail.com</a></p>
+  </section>
+
+  <hr class="lang-divider">
+  <p class="lang-label">English</p>
+
+  <!-- ── English ── -->
+  <section>
+    <h2>Privacy Policy &amp; Disclaimer</h2>
+    <p>Last updated: July 15, 2026</p>
+  </section>
+
+  <section>
+    <h2>1. Overview</h2>
+    <p>Desktop Zoning is a browser-based web tool developed by NARUKAMI AKUT for creating zoning wallpapers that organize Windows desktop icons. No installation is required — everything runs in your browser. This policy explains how the service handles information.</p>
+  </section>
+
+  <section>
+    <h2>2. Information We Collect</h2>
+    <table>
+      <thead>
+        <tr><th>Data Type</th><th>Purpose</th><th>Transmitted</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Background image, zone names, and other input</td>
+          <td>Generating the wallpaper and reference images</td>
+          <td>No (processed entirely in-browser)</td>
+        </tr>
+        <tr>
+          <td>Environment and zone settings</td>
+          <td>Restoring your settings on your next visit</td>
+          <td>No (stored only in browser localStorage)</td>
+        </tr>
+        <tr>
+          <td>Anonymous usage statistics (feature usage counts, error types)</td>
+          <td>Improving the service (Google Analytics)</td>
+          <td>Yes (Google)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>The service does not require an account or login and does not collect personally identifiable information such as name or email address. <strong>Your background image, any free-text zone names you enter, and the content of generated wallpapers/images are never transmitted to any server, under any circumstances.</strong> The only data sent as anonymous usage statistics is technical information such as which features were used and how often, and whether an error occurred.</p>
+  </section>
+
+  <section>
+    <h2>3. Third-Party Services</h2>
+    <p>The service uses the following Google service. Please refer to Google's Privacy Policy for details on how it handles data.</p>
+    <ul>
+      <li><strong>Google Analytics (GA4)</strong> — collects anonymous page views, feature usage counts (e.g. zone creation, wallpaper export), and error occurrences. Never includes image data, zone names, or the content of generated output.</li>
+    </ul>
+    <p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy →</a></p>
+  </section>
+
+  <section>
+    <h2>4. Handling of Image Data</h2>
+    <p>Any background image you select is processed entirely in your browser's memory and is never uploaded to or stored on a server. Generated wallpapers and reference images (PNG) are downloaded directly to your device only; neither the service operator nor any third party can view their contents. Closing your browser or reloading the page discards the selected background image from memory.</p>
+  </section>
+
+  <section>
+    <h2>5. Disclaimer</h2>
+    <p>The grid layout and zone placement generated by this service are calculated from the environment information you provide, and are not guaranteed to exactly match the actual icon layout on your device. Please use the calibration feature and verify the result against your actual display.</p>
+    <p>The developer assumes no liability for any damages arising from use of this service, during or after use. This service is provided "as is" without warranties of any kind, express or implied, including but not limited to fitness for a particular purpose or uninterrupted operation.</p>
+  </section>
+
+  <section>
+    <h2>6. Children's Privacy</h2>
+    <p>This service is not directed at children under 13. If we become aware that we have inadvertently collected information from a child under 13, please contact us at the address below.</p>
+  </section>
+
+  <section>
+    <h2>7. Changes to This Policy</h2>
+    <p>We may update this policy at any time. Changes will be posted on this page with an updated date.</p>
+  </section>
+
+  <section>
+    <h2>8. Contact</h2>
+    <p><a href="mailto:narukami.dev@gmail.com">narukami.dev@gmail.com</a></p>
+  </section>
+
+  <footer>
+    &copy; 2026 NARUKAMI AKUT — Desktop Zoning
+  </footer>
+
+</div>
+</body>
+</html>

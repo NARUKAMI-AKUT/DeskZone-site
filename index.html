@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desktop Zoning — デスクトップ整理壁紙メーカー</title>
+<link rel="stylesheet" href="css/style.css">
+<!-- GA4: 匿名の利用状況イベントのみ送信(画像・ゾーン名・生成PNGの中身は一切送信しない)。
+     TODO: G-XXXXXXXXXX をDesktop Zoning専用のGA4測定IDに差し替える -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+</head>
+<body>
+<header>
+  <h1>Desktop Zoning</h1>
+  <p class="tagline">デスクトップのアイコンをゾーン分けする壁紙をブラウザだけで作成 — 画像はどこにも送信されません</p>
+</header>
+<main>
+  <section id="preview-pane">
+    <div id="canvas-wrap"><canvas id="preview"></canvas></div>
+    <div id="zoom-bar">
+      <label>ズーム <input type="range" id="zoom" min="10" max="100" value="30"></label>
+      <span id="zoom-value">30%</span>
+      <button id="zoom-fit" type="button">画面に合わせる</button>
+    </div>
+  </section>
+  <div id="panel-resizer"></div>
+  <aside id="panel">
+    <div class="panel-toolbar">
+      <details class="guide">
+        <summary>使い方 / このアプリでできること</summary>
+        <div class="guide-content">
+          <ol>
+            <li><b>ステップ1</b>: お使いのモニタ環境を入力し、「グリッド基準画像」を壁紙に設定して、実際のアイコン位置とグリッドのズレをキャリブレーションで合わせます。</li>
+            <li><b>ステップ2</b>: プレビュー上をドラッグしてゾーンを作り、名前・看板・枠のデザインを調整します。</li>
+            <li><b>ステップ3</b>: 好きな背景画像を選んで壁紙PNGを出力し、Windowsの壁紙に設定します。</li>
+          </ol>
+          <p>ここまで全部このアプリで完結できますが、<b>ステップ2までで止めて、続きをAIに任せるのもおすすめ</b>です。
+          グリッド基準画像・ゾーン確認画像・設定JSONをChatGPTやClaudeに渡して
+          「このゾーン割りでデザイン壁紙を作って」と頼めば、凝ったデザインの壁紙も作れます。</p>
+          <p class="hint">背景画像はブラウザ内でのみ処理され、どこにも送信されません。</p>
+        </div>
+      </details>
+      <div id="settings-io" class="settings-io"></div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" type="button" data-tab="step1">ステップ1</button>
+      <button class="tab-btn" type="button" data-tab="step2">ステップ2</button>
+      <button class="tab-btn" type="button" data-tab="step3">ステップ3</button>
+    </div>
+    <section class="step active" id="step1">
+      <h2>ステップ1: 環境設定</h2>
+      <div id="step1-body"></div>
+    </section>
+    <section class="step" id="step2">
+      <h2>ステップ2: ゾーン指定</h2>
+      <div id="step2-body"></div>
+    </section>
+    <section class="step" id="step3">
+      <h2>ステップ3: 背景と出力</h2>
+      <div id="step3-body"></div>
+    </section>
+    <div class="ad-placeholder">広告スペース</div>
+    <p class="footer-link"><a href="privacy_policy.html" target="_blank" rel="noopener">プライバシーポリシー</a></p>
+  </aside>
+</main>
+<div id="guide-modal-overlay" class="modal-overlay" hidden>
+  <div class="modal-box">
+    <button id="guide-modal-close" class="modal-close" type="button" aria-label="閉じる">×</button>
+    <h2>使い方 / このアプリでできること</h2>
+    <div id="guide-modal-content"></div>
+  </div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
