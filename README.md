@@ -1,9 +1,21 @@
-# Desktop Zoning
+# DeskZone (Webアプリ)
 
-Windowsデスクトップのアイコンをゾーン分けする壁紙を、ブラウザだけで作るツール。
-インストール不要・完全クライアントサイド。背景画像はブラウザ内でのみ処理され、サーバーには送信されません。
+Windowsデスクトップのアイコンをゾーン分けする壁紙を、ブラウザだけで作る完全クライアントサイドアプリ。
+ビルド不要・外部依存ゼロ・画像はどこにも送信されない。
 
-このリポジトリは GitHub Pages でホストされているデプロイ済みサイトです。
-開発用リポジトリ（ソースコード・テスト）は非公開の [Desktop-Zoning](https://github.com/NARUKAMI-AKUT/Desktop-Zoning) にあります。
+## 起動
 
-by [NARUKAMI AKUT](https://narukami-akut.github.io)
+    cd webapp && python3 -m http.server 8000
+
+ブラウザで http://localhost:8000 を開く(ES modulesのためfile://では動かない)。
+
+## 構成
+
+- `js/gridcalc.js` `js/zones.js` `js/state.js` `js/coverfit.js` — 純ロジック(DOM非依存)
+- `js/render.js` — Canvas描画(プレビューと最終出力で共通)
+- `js/export.js` — 出力ゲート`runExport()`(将来の広告/有料版のフックポイント)
+- `js/ui-canvas.js` `js/ui-panel.js` `js/main.js` — UI
+
+## テスト
+
+    node --test "tests/webapp/**/*.test.mjs"   # リポジトリルートから

@@ -39,7 +39,7 @@ export function setupPreview(canvas, app) {
 		);
 		if (selected) {
 			const r = zoneRect(g, selected.cols, selected.rows);
-			ctx.strokeStyle = "#6db3f2";
+			ctx.strokeStyle = "#8b7cf6";
 			ctx.strokeRect(r.x, r.y, r.w, r.h);
 		}
 		if (drag?.ghost) {

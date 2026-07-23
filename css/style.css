@@ -17,17 +17,17 @@ main { flex: 1; display: flex; min-height: 0; }
   padding: 4px 10px; font-size: 12px; background: #1c222d; color: #dde3ea;
   border: 1px solid #3a4356; border-radius: 4px; cursor: pointer;
 }
-#zoom-fit:hover { background: #26304082; border-color: #6db3f2; }
+#zoom-fit:hover { background: #26304082; border-color: #8b7cf6; }
 #panel-resizer {
   width: 6px; flex-shrink: 0; cursor: col-resize; position: relative; background: transparent;
 }
 #panel-resizer::after {
   content: ""; position: absolute; left: 2px; top: 0; bottom: 0; width: 2px; background: #2a3140;
 }
-#panel-resizer:hover::after, #panel-resizer.dragging::after { background: #6db3f2; }
+#panel-resizer:hover::after, #panel-resizer.dragging::after { background: #8b7cf6; }
 #panel { width: 340px; flex-shrink: 0; overflow-y: auto; padding: 12px; }
 .step { margin-bottom: 18px; }
-.step h2 { font-size: 14px; color: #6db3f2; margin-bottom: 8px; }
+.step h2 { font-size: 14px; color: #8b7cf6; margin-bottom: 8px; }
 .step label { display: block; font-size: 12px; margin: 6px 0 2px; color: #a8b2c2; }
 .step input, .step select, .step button {
   width: 100%; padding: 5px 8px; font-size: 13px;
@@ -35,7 +35,7 @@ main { flex: 1; display: flex; min-height: 0; }
 }
 .step input[type="range"] { padding: 0; }
 .step button { cursor: pointer; margin-top: 8px; }
-.step button:hover { background: #26304082; border-color: #6db3f2; }
+.step button:hover { background: #26304082; border-color: #8b7cf6; }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .hint { font-size: 11px; color: #8a94a6; margin-top: 4px; line-height: 1.5; }
 .ad-placeholder {
@@ -44,7 +44,7 @@ main { flex: 1; display: flex; min-height: 0; }
 }
 .footer-link { margin-top: 10px; text-align: center; font-size: 11px; }
 .footer-link a { color: #6a7688; }
-.footer-link a:hover { color: #6db3f2; }
+.footer-link a:hover { color: #8b7cf6; }
 .step h3.sub { font-size: 12px; color: #a8b2c2; margin: 12px 0 4px; }
 .calib-actions { display: flex; justify-content: flex-end; margin-top: 8px; }
 .calib-actions .calib-reset { width: auto; padding: 5px 12px; font-size: 12px; }
@@ -53,7 +53,7 @@ main { flex: 1; display: flex; min-height: 0; }
   flex: 1; height: 28px; box-sizing: border-box; text-align: left; margin-top: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.zone-item.selected { border-color: #6db3f2; background: #223046; }
+.zone-item.selected { border-color: #8b7cf6; background: #223046; }
 .zone-item-row .zone-item-delete {
   flex-shrink: 0; flex-grow: 0; width: 32px; height: 28px; box-sizing: border-box;
   padding: 0; margin-top: 0; line-height: 26px; color: #f2a6a6;
@@ -64,7 +64,7 @@ button.primary { border-color: #2e6db3; background: #1d3a5c; font-weight: bold; 
 button.primary:hover { background: #24507e; }
 .panel-toolbar { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 14px; }
 .guide { flex: 1; min-width: 0; font-size: 12px; }
-.guide summary { cursor: pointer; color: #6db3f2; }
+.guide summary { cursor: pointer; color: #8b7cf6; }
 .guide ol { margin: 8px 0 8px 18px; line-height: 1.7; }
 .guide p { margin: 6px 0; line-height: 1.6; color: #a8b2c2; }
 .settings-io { display: flex; gap: 6px; flex-shrink: 0; }
@@ -72,7 +72,7 @@ button.primary:hover { background: #24507e; }
   padding: 6px 10px; font-size: 11px; white-space: nowrap;
   background: #1c222d; color: #dde3ea; border: 1px solid #3a4356; border-radius: 4px; cursor: pointer;
 }
-.settings-io button:hover { background: #26304082; border-color: #6db3f2; }
+.settings-io button:hover { background: #26304082; border-color: #8b7cf6; }
 
 .tabs { display: flex; gap: 4px; margin-bottom: 14px; border-bottom: 1px solid #2a3140; }
 .tab-btn {
@@ -80,7 +80,7 @@ button.primary:hover { background: #24507e; }
   color: #8a94a6; font-size: 13px; padding: 8px 4px; cursor: pointer; border-radius: 0;
 }
 .tab-btn:hover { color: #dde3ea; background: #1c222d82; }
-.tab-btn.active { color: #6db3f2; border-bottom-color: #6db3f2; }
+.tab-btn.active { color: #8b7cf6; border-bottom-color: #8b7cf6; }
 .step { display: none; }
 .step.active { display: block; }
 
@@ -98,6 +98,6 @@ button.primary:hover { background: #24507e; }
   background: none; border: none; color: #8a94a6; font-size: 18px; line-height: 1; cursor: pointer;
 }
 .modal-close:hover { color: #dde3ea; }
-.modal-box h2 { font-size: 16px; color: #6db3f2; margin-bottom: 12px; padding-right: 24px; }
+.modal-box h2 { font-size: 16px; color: #8b7cf6; margin-bottom: 12px; padding-right: 24px; }
 .modal-box ol { margin: 8px 0 8px 18px; line-height: 1.7; font-size: 13px; }
 .modal-box p { margin: 8px 0; line-height: 1.6; font-size: 13px; color: #a8b2c2; }
