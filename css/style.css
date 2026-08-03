@@ -98,6 +98,7 @@ button.primary:hover { background: #24507e; }
   background: #1c222d; color: #dde3ea; border: 1px solid #3a4356; border-radius: 4px; cursor: pointer;
 }
 .settings-io button:hover { background: #26304082; border-color: #8b7cf6; }
+.settings-io .reset-btn:hover { background: #402626; border-color: #f26d6d; color: #f2a6a6; }
 
 .tabs { display: flex; gap: 4px; margin-bottom: 14px; border-bottom: 1px solid #2a3140; }
 .tab-btn {

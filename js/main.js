@@ -25,9 +25,12 @@ app.redraw = () => {
 };
 
 const step1 = setupStep1(document.getElementById("step1-body"), app);
-app.onSettingsReplaced = () => step1.refresh();
+const step3 = setupStep3(document.getElementById("step3-body"), app);
+app.onSettingsReplaced = () => {
+	step1.refresh();
+	step3.refresh();
+};
 setupStep2(document.getElementById("step2-body"), app);
-setupStep3(document.getElementById("step3-body"), app);
 setupSettingsIO(document.getElementById("settings-io"), app);
 
 const zoom = document.getElementById("zoom");

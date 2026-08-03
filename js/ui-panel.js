@@ -10,7 +10,13 @@ import {
 import { downloadCanvas, downloadText, runExport } from "./export.js";
 import { computeGrid } from "./gridcalc.js";
 import { render, renderGridReference, renderZonePreview } from "./render.js";
-import { applyEnv, FRAME_DEFAULTS, fromJSON, toJSON } from "./state.js";
+import {
+	applyEnv,
+	defaultSettings,
+	FRAME_DEFAULTS,
+	fromJSON,
+	toJSON,
+} from "./state.js";
 
 export function el(tag, attrs = {}, ...children) {
 	const e = document.createElement(tag);
@@ -668,6 +674,15 @@ export function setupStep3(container, app) {
 		bgColor,
 		exportBtn,
 	);
+
+	function refresh() {
+		bgColor.value = app.settings.backgroundColor;
+		fileIn.value = "";
+		fileNameLabel.textContent = app.background
+			? fileNameLabel.textContent
+			: "未選択";
+	}
+	return { refresh };
 }
 
 // 設定JSONの保存・読み込み。ステップに依存せずいつでも使えるよう、
@@ -717,6 +732,28 @@ export function setupSettingsIO(container, app) {
 		},
 		"設定を読み込む",
 	);
+	const resetBtn = el(
+		"button",
+		{
+			class: "reset-btn",
+			title: "環境・キャリブレーション・ゾーン・背景をすべて初期状態に戻す",
+			onclick: () => {
+				if (
+					!confirm(
+						"すべての設定(環境・キャリブレーション・ゾーン・背景画像)を初期化します。元には戻せません。よろしいですか?",
+					)
+				)
+					return;
+				app.settings = defaultSettings();
+				app.background = null;
+				app.selectedZoneId = null;
+				app.onSettingsReplaced?.();
+				app.onZonesChanged();
+				app.redraw();
+			},
+		},
+		"設定をリセット",
+	);
 
-	container.append(exportBtn, importBtn, fileInput);
+	container.append(exportBtn, importBtn, resetBtn, fileInput);
 }
