@@ -76,9 +76,11 @@ main { flex: 1; display: flex; min-height: 0; }
 .default-editor > h3.sub { margin-top: 0; }
 button.primary { border-color: #2e6db3; background: #1d3a5c; font-weight: bold; }
 button.primary:hover { background: #24507e; }
-.panel-toolbar { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+/* ガイドボタンを上、設定入出力ボタン(書き出す/読み込む/リセット)を下に縦積みし、
+   両者の幅を揃える(設定ボタン側が増えてもガイドボタンとずれないように) */
+.panel-toolbar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
 .guide-open-btn {
-  flex: 1; min-width: 0; width: auto; margin-top: 0; text-align: left;
+  width: 100%; margin-top: 0; text-align: left;
   padding: 6px 10px; font-size: 12px; background: #1c222d; color: #8b7cf6;
   border: 1px solid #3a4356; border-radius: 4px; cursor: pointer;
 }
@@ -92,9 +94,9 @@ button.primary:hover { background: #24507e; }
   border-left: 3px solid #8b7cf6; border-radius: 4px;
 }
 .guide-tip-title { font-weight: bold; margin-bottom: 4px; }
-.settings-io { display: flex; gap: 6px; flex-shrink: 0; }
+.settings-io { display: flex; gap: 6px; }
 .settings-io button {
-  padding: 6px 10px; font-size: 11px; white-space: nowrap;
+  flex: 1; padding: 6px 10px; font-size: 11px; white-space: nowrap;
   background: #1c222d; color: #dde3ea; border: 1px solid #3a4356; border-radius: 4px; cursor: pointer;
 }
 .settings-io button:hover { background: #26304082; border-color: #8b7cf6; }
