@@ -3,6 +3,62 @@
 import { computeCoverFit } from "./coverfit.js";
 import { cellAddress, cellRect, zoneRect } from "./gridcalc.js";
 
+// グリッド基準画像・ゾーン確認画像の右上に入れるブランドロゴ。
+// 読み込み前に出力されても文字だけは表示されるよう、失敗しても無視する。
+let brandMarkImg = null;
+if (typeof Image !== "undefined") {
+	brandMarkImg = new Image();
+	brandMarkImg.src = new URL(
+		"../assets/brand/deskzone_mark.png",
+		import.meta.url,
+	).href;
+}
+
+function drawBrandWatermark(ctx, width) {
+	const scale = Math.max(0.5, width / 3840);
+	const margin = 20 * scale;
+	const pad = 10 * scale;
+	const iconSize = 34 * scale;
+	const gap = 8 * scale;
+	const appFontSize = 20 * scale;
+	const brandFontSize = 12 * scale;
+
+	ctx.save();
+	ctx.font = `bold ${appFontSize}px "Segoe UI", "Yu Gothic UI", sans-serif`;
+	const appW = ctx.measureText("DeskZone").width;
+	ctx.font = `${brandFontSize}px "Segoe UI", "Yu Gothic UI", sans-serif`;
+	const brandW = ctx.measureText("NARUKAMI AKUT").width;
+	const textW = Math.max(appW, brandW);
+
+	const boxW = pad * 2 + iconSize + gap + textW;
+	const boxH = pad * 2 + iconSize;
+	const x = width - margin - boxW;
+	const y = margin;
+
+	ctx.fillStyle = "rgba(10, 12, 20, 0.55)";
+	ctx.beginPath();
+	ctx.roundRect(x, y, boxW, boxH, 8 * scale);
+	ctx.fill();
+
+	if (brandMarkImg?.complete && brandMarkImg.naturalWidth > 0) {
+		ctx.drawImage(brandMarkImg, x + pad, y + pad, iconSize, iconSize);
+	}
+
+	const textX = x + pad + iconSize + gap;
+	const textBlockH = brandFontSize + appFontSize;
+	let textY = y + (boxH - textBlockH) / 2;
+	ctx.textAlign = "left";
+	ctx.textBaseline = "top";
+	ctx.font = `${brandFontSize}px "Segoe UI", "Yu Gothic UI", sans-serif`;
+	ctx.fillStyle = "rgba(220, 226, 240, 0.75)";
+	ctx.fillText("NARUKAMI AKUT", textX, textY);
+	textY += brandFontSize;
+	ctx.font = `bold ${appFontSize}px "Segoe UI", "Yu Gothic UI", sans-serif`;
+	ctx.fillStyle = "#b3a4ff";
+	ctx.fillText("DeskZone", textX, textY);
+	ctx.restore();
+}
+
 export function render(ctx, settings, opts = {}) {
 	const { background = null, showGrid = false, showTaskbar = false } = opts;
 	const { width, height } = settings.env;
@@ -236,6 +292,7 @@ export function renderGridReference(settings) {
 			ctx.fillText(cellAddress(c, r), rect.x + 4, rect.y + rect.h - 4);
 		}
 	}
+	drawBrandWatermark(ctx, width);
 	return canvas;
 }
 
@@ -274,5 +331,6 @@ export function renderZonePreview(settings) {
 		ctx.font = "28px sans-serif";
 		ctx.fillText(range, r.x + r.w / 2, r.y + r.h / 2 + 22);
 	});
+	drawBrandWatermark(ctx, width);
 	return canvas;
 }

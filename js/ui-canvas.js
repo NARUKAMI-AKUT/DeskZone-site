@@ -7,10 +7,22 @@ import { render } from "./render.js";
 import {
 	createZone,
 	findZoneAt,
+	planResizePush,
 	resizeEdges,
 	zoneFromDrag,
 	zonesOverlap,
 } from "./zones.js";
+
+// リサイズ方向に応じたカーソル形状(角は斜め、辺は直角方向)
+function cursorForEdges(edges) {
+	if ((edges.top && edges.left) || (edges.bottom && edges.right))
+		return "nwse-resize";
+	if ((edges.top && edges.right) || (edges.bottom && edges.left))
+		return "nesw-resize";
+	if (edges.left || edges.right) return "ew-resize";
+	if (edges.top || edges.bottom) return "ns-resize";
+	return "";
+}
 
 export function setupPreview(canvas, app) {
 	const ctx = canvas.getContext("2d");
@@ -32,17 +44,25 @@ export function setupPreview(canvas, app) {
 	function drawOverlay() {
 		const g = app.settings.grid;
 		ctx.save();
-		ctx.setLineDash([12, 8]);
-		ctx.lineWidth = 4;
 		const selected = app.settings.zones.find(
 			(z) => z.id === app.selectedZoneId,
 		);
 		if (selected) {
 			const r = zoneRect(g, selected.cols, selected.rows);
-			ctx.strokeStyle = "#8b7cf6";
+			// 塗り足し+暗色の縁取り+明るい縁取りの二重線で、どんな背景色の上でもはっきり見えるようにする
+			ctx.fillStyle = "rgba(139, 124, 246, 0.22)";
+			ctx.fillRect(r.x, r.y, r.w, r.h);
+			ctx.setLineDash([]);
+			ctx.lineWidth = 8;
+			ctx.strokeStyle = "rgba(10, 10, 20, 0.85)";
+			ctx.strokeRect(r.x, r.y, r.w, r.h);
+			ctx.lineWidth = 4;
+			ctx.strokeStyle = "#b3a4ff";
 			ctx.strokeRect(r.x, r.y, r.w, r.h);
 		}
 		if (drag?.ghost) {
+			ctx.setLineDash([12, 8]);
+			ctx.lineWidth = 4;
 			const r = zoneRect(g, drag.ghost.cols, drag.ghost.rows);
 			ctx.strokeStyle = drag.ghost.invalid ? "#f26d6d" : "#6df2a8";
 			ctx.strokeRect(r.x, r.y, r.w, r.h);
@@ -85,6 +105,7 @@ export function setupPreview(canvas, app) {
 					edges,
 					orig: { cols: [...hit.cols], rows: [...hit.rows] },
 				};
+				canvas.style.cursor = cursorForEdges(edges);
 			}
 			app.onZonesChanged();
 		} else {
@@ -113,9 +134,26 @@ export function setupPreview(canvas, app) {
 	}
 
 	canvas.addEventListener("pointermove", (ev) => {
-		if (!drag) return;
 		const p = canvasPoint(ev);
 		const grid = app.settings.grid;
+		if (!drag) {
+			// ドラッグ中でなければ、辺の上にカーソルがあるときだけリサイズカーソルに変える
+			const hoverCell = cellFromPoint(grid, p.x, p.y);
+			if (!hoverCell) {
+				canvas.style.cursor = "default";
+				return;
+			}
+			const hoverHit = findZoneAt(
+				app.settings.zones,
+				hoverCell.col,
+				hoverCell.row,
+			);
+			canvas.style.cursor = hoverHit
+				? cursorForEdges(resizeEdges(hoverHit, hoverCell.col, hoverCell.row)) ||
+					"pointer"
+				: "crosshair";
+			return;
+		}
 		const cell = cellFromPoint(grid, p.x, p.y) ?? nearestCell(grid, p.x, p.y);
 		if (drag.mode === "create") {
 			const range = zoneFromDrag(drag.start, cell);
@@ -127,10 +165,22 @@ export function setupPreview(canvas, app) {
 			if (drag.edges.right) next.cols[1] = Math.max(cell.col, next.cols[0]);
 			if (drag.edges.top) next.rows[0] = Math.min(cell.row, next.rows[1]);
 			if (drag.edges.bottom) next.rows[1] = Math.max(cell.row, next.rows[0]);
-			if (!overlapsOthers({ ...next }, z.id)) {
-				z.cols = next.cols;
-				z.rows = next.rows;
+			if (overlapsOthers({ ...next }, z.id)) {
+				// 接している隣接ゾーンを押し出せるなら押し出し、無理ならこの移動は諦める
+				const plan = planResizePush(app.settings.zones, z, next, drag.edges);
+				if (!plan) {
+					redraw();
+					return;
+				}
+				for (const patch of plan) {
+					const target = app.settings.zones.find((zz) => zz.id === patch.id);
+					if (!target) continue;
+					if (patch.cols) target.cols = patch.cols;
+					if (patch.rows) target.rows = patch.rows;
+				}
 			}
+			z.cols = next.cols;
+			z.rows = next.rows;
 		}
 		redraw();
 	});

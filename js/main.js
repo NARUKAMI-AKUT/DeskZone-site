@@ -76,14 +76,12 @@ tabButtons.forEach((btn) => {
 	});
 });
 
-// 使い方ガイド: ページを開いたときにモーダル表示(既存の折りたたみガイドの内容を複製)
+// 使い方ガイド: ページを開いたときに表示。サイドバーのボタンからも再度開ける。
 const guideModal = document.getElementById("guide-modal-overlay");
-const guideModalContent = document.getElementById("guide-modal-content");
-const guideSource = document.querySelector(".guide-content");
-if (guideModal && guideModalContent && guideSource) {
-	guideModalContent.innerHTML = guideSource.innerHTML;
+guideModal.hidden = false;
+document.getElementById("guide-open-btn").addEventListener("click", () => {
 	guideModal.hidden = false;
-}
+});
 document.getElementById("guide-modal-close").addEventListener("click", () => {
 	guideModal.hidden = true;
 });

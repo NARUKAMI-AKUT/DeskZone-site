@@ -458,10 +458,19 @@ export function setupStep2(container, app) {
 		const zone = app.settings.zones.find((z) => z.id === app.selectedZoneId);
 		if (zone) container.append(zoneEditor(zone));
 
-		// 全体の枠デフォルト
+		// 全体の枠デフォルト(選択中のゾーン編集と混同されないよう別枠で表示)
 		container.append(
-			el("h3", { class: "sub" }, "全体の枠デフォルト(角丸枠線)"),
-			paramEditor(app.settings.styleDefaults.frame, app),
+			el(
+				"div",
+				{ class: "default-editor" },
+				el("h3", { class: "sub" }, "全体の枠デフォルト(角丸枠線)"),
+				el(
+					"p",
+					{ class: "hint" },
+					"個別に枠スタイルを設定していない、すべてのゾーンに適用されます。",
+				),
+				paramEditor(app.settings.styleDefaults.frame, app),
+			),
 		);
 
 		container.append(

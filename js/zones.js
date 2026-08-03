@@ -67,6 +67,77 @@ export function findZoneAt(zones, col, row) {
 	return null;
 }
 
+// 指定した1辺方向について、接している隣接ゾーンを押し出す計画を立てる。
+// 押し出すと隣接ゾーンが消滅する(幅/高さが0以下になる)場合は null を返す。
+function planPushEdge(zones, movingZone, next, edge) {
+	const patches = [];
+	for (const z of zones) {
+		if (z.id === movingZone.id) continue;
+		if (edge === "right" || edge === "left") {
+			const rowsOverlap =
+				z.rows[0] <= next.rows[1] && next.rows[0] <= z.rows[1];
+			if (!rowsOverlap) continue;
+			if (
+				edge === "right" &&
+				z.cols[0] > movingZone.cols[1] &&
+				z.cols[0] <= next.cols[1]
+			) {
+				const newLeft = next.cols[1] + 1;
+				if (newLeft > z.cols[1]) return null;
+				patches.push({ id: z.id, cols: [newLeft, z.cols[1]] });
+			} else if (
+				edge === "left" &&
+				z.cols[1] < movingZone.cols[0] &&
+				z.cols[1] >= next.cols[0]
+			) {
+				const newRight = next.cols[0] - 1;
+				if (newRight < z.cols[0]) return null;
+				patches.push({ id: z.id, cols: [z.cols[0], newRight] });
+			}
+		} else {
+			const colsOverlap =
+				z.cols[0] <= next.cols[1] && next.cols[0] <= z.cols[1];
+			if (!colsOverlap) continue;
+			if (
+				edge === "bottom" &&
+				z.rows[0] > movingZone.rows[1] &&
+				z.rows[0] <= next.rows[1]
+			) {
+				const newTop = next.rows[1] + 1;
+				if (newTop > z.rows[1]) return null;
+				patches.push({ id: z.id, rows: [newTop, z.rows[1]] });
+			} else if (
+				edge === "top" &&
+				z.rows[1] < movingZone.rows[0] &&
+				z.rows[1] >= next.rows[0]
+			) {
+				const newBottom = next.rows[0] - 1;
+				if (newBottom < z.rows[0]) return null;
+				patches.push({ id: z.id, rows: [z.rows[0], newBottom] });
+			}
+		}
+	}
+	return patches;
+}
+
+// リサイズ中のゾーンが next の範囲に広がるとき、接している隣接ゾーンを
+// 押し出すことで重なりを解消できるかを判定する。
+// 戻り値: 隣接ゾーンへのパッチ配列([{id, cols?, rows?}])。解消不可能なら null。
+export function planResizePush(zones, movingZone, next, edges) {
+	const activeEdges = ["left", "right", "top", "bottom"].filter(
+		(e) => edges[e],
+	);
+	const merged = new Map();
+	for (const edge of activeEdges) {
+		const patches = planPushEdge(zones, movingZone, next, edge);
+		if (!patches) return null;
+		for (const p of patches) {
+			merged.set(p.id, { ...merged.get(p.id), ...p });
+		}
+	}
+	return [...merged.values()];
+}
+
 export function resizeEdges(zone, col, row) {
 	const inside =
 		col >= zone.cols[0] &&
