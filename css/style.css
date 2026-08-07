@@ -42,10 +42,10 @@ main { flex: 1; display: flex; min-height: 0; }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .hint { font-size: 11px; color: #8a94a6; margin-top: 4px; line-height: 1.5; }
 .ad-placeholder {
-  flex-shrink: 0; margin: 0 12px; padding: 24px 0; min-height: 90px;
+  flex-shrink: 0; margin: 0 12px; min-height: 90px;
   box-sizing: border-box; display: flex; align-items: center; justify-content: center;
-  text-align: center; border: 1px dashed #3a4356; border-radius: 4px; color: #5a6478; font-size: 12px;
 }
+.ad-placeholder ins.adsbygoogle { width: 100%; }
 .footer-link { flex-shrink: 0; margin: 8px 0 10px; text-align: center; font-size: 11px; }
 .footer-link a { color: #6a7688; }
 .footer-link a:hover { color: #8b7cf6; }
